@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="技术," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言小时候家里有一台红梅胶片相机，自己小时候的照片都是使用它来拍摄，然后老爸自己在暗房里进行照片冲洗，一直感觉神秘，却从未真的深入探寻原理。 对于一个不热衷于摄影的人来说，实在没有足够的动力去研究如何拍摄一张好的图片；但是对于一名从事视频监控领域的软件人员来说，还是很有必要弄清楚这其中的原理，最近借由立项调研「在移动场景下的图像效果优化」项目，让自己终于静心的研究学习了一番。这里整合下各种零碎信">
+<meta name="keywords" content="技术">
+<meta property="og:type" content="article">
+<meta property="og:title" content="说说影响成像的那些参数">
+<meta property="og:url" content="http://yoursite.com/2018/02/03/说说影响成像的那些参数/index.html">
+<meta property="og:site_name" content="81博客">
+<meta property="og:description" content="前言小时候家里有一台红梅胶片相机，自己小时候的照片都是使用它来拍摄，然后老爸自己在暗房里进行照片冲洗，一直感觉神秘，却从未真的深入探寻原理。 对于一个不热衷于摄影的人来说，实在没有足够的动力去研究如何拍摄一张好的图片；但是对于一名从事视频监控领域的软件人员来说，还是很有必要弄清楚这其中的原理，最近借由立项调研「在移动场景下的图像效果优化」项目，让自己终于静心的研究学习了一番。这里整合下各种零碎信">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/02/03/说说影响成像的那些参数/camera.png">
+<meta property="og:image" content="http://yoursite.com/2018/02/03/说说影响成像的那些参数/hole.png">
+<meta property="og:image" content="http://yoursite.com/2018/02/03/说说影响成像的那些参数/pinhole_camera.png">
+<meta property="og:image" content="http://yoursite.com/2018/02/03/说说影响成像的那些参数/film_camera.png">
+<meta property="og:image" content="http://yoursite.com/2018/02/03/说说影响成像的那些参数/digital-camera.png">
+<meta property="og:image" content="http://yoursite.com/2018/02/03/说说影响成像的那些参数/iris.png">
+<meta property="og:image" content="http://yoursite.com/2018/02/03/说说影响成像的那些参数/shutter.png">
+<meta property="og:image" content="http://yoursite.com/2018/02/03/说说影响成像的那些参数/iso.png">
+<meta property="og:image" content="http://yoursite.com/2018/02/03/说说影响成像的那些参数/mi6-camera.png">
+<meta property="og:updated_time" content="2018-02-06T02:02:33.861Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="说说影响成像的那些参数">
+<meta name="twitter:description" content="前言小时候家里有一台红梅胶片相机，自己小时候的照片都是使用它来拍摄，然后老爸自己在暗房里进行照片冲洗，一直感觉神秘，却从未真的深入探寻原理。 对于一个不热衷于摄影的人来说，实在没有足够的动力去研究如何拍摄一张好的图片；但是对于一名从事视频监控领域的软件人员来说，还是很有必要弄清楚这其中的原理，最近借由立项调研「在移动场景下的图像效果优化」项目，让自己终于静心的研究学习了一番。这里整合下各种零碎信">
+<meta name="twitter:image" content="http://yoursite.com/2018/02/03/说说影响成像的那些参数/camera.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/03/说说影响成像的那些参数/"/>
+
+
+
+
+
+  <title>说说影响成像的那些参数 | 81博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">81博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记下经历，沉淀知识，构建技能</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/03/说说影响成像的那些参数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bryant81">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="81博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">说说影响成像的那些参数</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-03T09:48:33+08:00">
+                2018-02-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/图像/" itemprop="url" rel="index">
+                    <span itemprop="name">图像</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/2018/02/03/说说影响成像的那些参数/camera.png" alt="摄像机"></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>小时候家里有一台红梅胶片相机，自己小时候的照片都是使用它来拍摄，然后老爸自己在暗房里进行照片冲洗，一直感觉神秘，却从未真的深入探寻原理。</p>
+<p>对于一个不热衷于摄影的人来说，实在没有足够的动力去研究如何拍摄一张好的图片；但是对于一名从事视频监控领域的软件人员来说，还是很有必要弄清楚这其中的原理，最近借由立项调研「在移动场景下的图像效果优化」项目，让自己终于静心的研究学习了一番。这里整合下各种零碎信息，希望对于小白能有所帮助。</p>
+<h2 id="成像因素"><a href="#成像因素" class="headerlink" title="成像因素"></a>成像因素</h2><h3 id="原理：小孔成像"><a href="#原理：小孔成像" class="headerlink" title="原理：小孔成像"></a>原理：小孔成像</h3><blockquote>
+<p>景光之人煦若射，下者之入也高，高者之入也下。From 《墨子·经下说》</p>
+</blockquote>
+<p>早在两千四百多年，宋国大夫墨子就观察发现了小孔成像的现象，五十多年以后，亚里士多德也发现了相同的现象</p>
+<p>小孔成像的原因是：光在同种介质下，在不受引力的作用的情况下沿直线传播「黑洞就有巨大引力，可以改变光的方向」</p>
+<p>小学就做过通过小孔形成一个蜡烛的倒立的影响，图像的清晰度和孔的位置相关</p>
+<p><img src="/2018/02/03/说说影响成像的那些参数/hole.png" alt="小孔成像"></p>
+<h2 id="相机发展史"><a href="#相机发展史" class="headerlink" title="相机发展史"></a>相机发展史</h2><p>如果将小孔成像的白板换成一种对光子敏感可以留下印记的材料，那么就是一台相机了。</p>
+<ul>
+<li>针孔相机</li>
+</ul>
+<p>由不透光的容器和感光材料以及针孔组成，拥有无限景深(因为没有焦距),但需要长时间曝光(孔太小，需要用时间来增加收集到的光)，而且会出现炫光现象</p>
+<p><img src="/2018/02/03/说说影响成像的那些参数/pinhole_camera.png" alt="针孔相机"></p>
+<ul>
+<li>胶片相机</li>
+</ul>
+<p>对于针孔相机进行改造，增加了凸面镜，用于增大进光量(因为这样就可以不是孔，而是个洞，凸面镜可以实现孔的作用)，通过快门实现一次曝光的的动作，早起的胶片就是卤化银作为感光材料，光会在卤化银上留下印迹，通过暗房冲洗可以形成黑白照片</p>
+<p><img src="/2018/02/03/说说影响成像的那些参数/film_camera.png" alt="胶片相机"></p>
+<ul>
+<li>数码相机</li>
+</ul>
+<p>针对感光材料的改进，使用可反复利用的CCD/CMOS材料，形成数字型号，这样就有了数码相机。数码相机解决了携带交卷的问题，几乎不再会听人说「这么好的景色，却没有交卷了」的抱怨了。但是由于感光材料的特性，依然不少人热爱着传统的交卷，认为更加颜色自然</p>
+<p><img src="/2018/02/03/说说影响成像的那些参数/digital-camera.png" alt="数码相机"></p>
+<h2 id="影响曝光的因素"><a href="#影响曝光的因素" class="headerlink" title="影响曝光的因素"></a>影响曝光的因素</h2><p>知道了成像的原理，其实就「外界的光通过镜头照射到感光材料上留下一副景象的记录」，所以曝光的各个环节影响着记录的效果，这些环节主要包括光圈，快门，ISO</p>
+<h3 id="光圈：控制光流的口径"><a href="#光圈：控制光流的口径" class="headerlink" title="光圈：控制光流的口径"></a>光圈：控制光流的口径</h3><p><img src="/2018/02/03/说说影响成像的那些参数/iris.png" alt="光圈"></p>
+<ul>
+<li>通过控制光圈的大小来决定进光的速率</li>
+<li>光圈值越大，进光率越小,解析度越差</li>
+<li>光圈值越小，进光率越大，衍射越厉害</li>
+<li>光圈优先：设定光圈值，其他的值根据光圈值和实际环境自动设定</li>
+</ul>
+<h3 id="快门：控制这光流的通断"><a href="#快门：控制这光流的通断" class="headerlink" title="快门：控制这光流的通断"></a>快门：控制这光流的通断</h3><p><img src="/2018/02/03/说说影响成像的那些参数/shutter.png" alt="快门"></p>
+<ul>
+<li>快门是照相机用来控制感光片有效曝光时间的机构</li>
+<li>分类<ul>
+<li>按照构造分类：机械/电子/电子断流</li>
+<li>按照位置分类：镜前/镜间/镜后/反光镜/焦平面</li>
+</ul>
+</li>
+<li>特性<ul>
+<li>Global shutter:Sensor所有像素点同时收集光线，同时曝光;CCD就是Global shutter工作方式</li>
+<li>Rolling shutter:通过Sensor逐行曝光的方式实现的</li>
+<li>如果被拍摄物体相对于相机高速运动时。用Global shutter方式拍摄，假如曝光时间过长，照片会产生像糊现象。而用Rolling shutter方式拍摄，逐行扫描速度不够，拍摄结果就可能出现“倾斜”、“摇摆不定”或“部分曝光”等任一种情况</li>
+</ul>
+</li>
+</ul>
+<h3 id="ISO：控制这感光器件对于光子的敏感度"><a href="#ISO：控制这感光器件对于光子的敏感度" class="headerlink" title="ISO：控制这感光器件对于光子的敏感度"></a>ISO：控制这感光器件对于光子的敏感度</h3><p><img src="/2018/02/03/说说影响成像的那些参数/iso.png" alt="ISO"></p>
+<ul>
+<li>ISO是感光度的简称，就像上面看到的相机发展史提到的那样，感光器件也一直在发展。从胶片时代的卤化银到数码时代的CCD和CMOS</li>
+<li>感光度就是对光光线强弱的灵敏度，数字越高，越灵敏</li>
+<li>ISO100的胶卷，相机2秒可以正确曝光的话，同样光线条件下用ISO200的胶卷只需要1秒即可，用ISO400则只要0.5秒</li>
+<li>特性<ul>
+<li>感光度越低，仅对强光有反映，但成像细腻</li>
+<li>感光度高，可在弱光下拍摄，但成像粗糙</li>
+<li>在像素相等的情况下，CCD/CMOS面积越大，高ISO的成像质量越好</li>
+</ul>
+</li>
+</ul>
+<h2 id="理解那些摄像头的性能指标"><a href="#理解那些摄像头的性能指标" class="headerlink" title="理解那些摄像头的性能指标"></a>理解那些摄像头的性能指标</h2><p><img src="/2018/02/03/说说影响成像的那些参数/mi6-camera.png" alt="小米6相机规格参数"><br>上图是小米6的后置摄像头的官方参数，对于非专业人士来说，只是一些数字，看了上面的介绍，我们这对这个表给大家解释下</p>
+<ul>
+<li>这个是供应链整合的时代，小米6的摄像头核心是图像传感器，就是Sony的IMX386</li>
+<li>12MP：1200万像素，也就是IMX386上分布了这么多个像素采集点</li>
+<li>1.25μm/1.0μm：单位像素尺寸，这个尺寸越大每个像素的解析度越高，IMX386的面积为1/2.8英寸；小米5S的使用的是IMX378,像素尺寸1.55μm,面积增大为1/2.3英寸，已经接近普通卡片数码相机的感光器件尺寸</li>
+<li>6片式/5片式镜头: 透镜主要的作用是滤掉一些杂光,镜片并不是越多越好，镜片越多会导致光线折射率增大,简单来说就是会损耗光线，影响成像亮度。所以更多的是镜头调教要合适</li>
+<li>f1.8光圈/f2.6光圈：广角镜头使用的大光圈，背景虚化效果更好；长焦镜头使用的小光圈，配合52mm焦距更适合拍摄人脸</li>
+<li>27mm/52mm：等效焦距，在广角摄像头切换到长焦摄像头，可以实现2倍的画面放大，清晰度远高于数码变焦</li>
+</ul>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>希望通过本文你能对摄像头的成像原理和参数有了初步了解，面对各大手机厂商的给的产品指标能看出门道</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/技术/" rel="tag"># 技术</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/03/Django学习-简介-1/" rel="next" title="Django学习-简介(1)">
+                <i class="fa fa-chevron-left"></i> Django学习-简介(1)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/header.png"
+                alt="Bryant81" />
+            
+              <p class="site-author-name" itemprop="name">Bryant81</p>
+              <p class="site-description motion-element" itemprop="description">技术改变生活</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/bryant81" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.zhihu.com/people/bryant81" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#成像因素"><span class="nav-number">2.</span> <span class="nav-text">成像因素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原理：小孔成像"><span class="nav-number">2.1.</span> <span class="nav-text">原理：小孔成像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相机发展史"><span class="nav-number">3.</span> <span class="nav-text">相机发展史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#影响曝光的因素"><span class="nav-number">4.</span> <span class="nav-text">影响曝光的因素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#光圈：控制光流的口径"><span class="nav-number">4.1.</span> <span class="nav-text">光圈：控制光流的口径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快门：控制这光流的通断"><span class="nav-number">4.2.</span> <span class="nav-text">快门：控制这光流的通断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ISO：控制这感光器件对于光子的敏感度"><span class="nav-number">4.3.</span> <span class="nav-text">ISO：控制这感光器件对于光子的敏感度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#理解那些摄像头的性能指标"><span class="nav-number">5.</span> <span class="nav-text">理解那些摄像头的性能指标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-number">6.</span> <span class="nav-text">后记</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bryant81</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
