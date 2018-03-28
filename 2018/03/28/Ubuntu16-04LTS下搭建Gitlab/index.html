@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="杂文," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,20 +79,17 @@
 
 
 
-<meta name="description" content="“洗手的时候，日子从水盆里过去；吃饭的时候，日子从饭碗里过去；默默时，便从凝然的双眼前过去” –From 朱自清《匆匆》">
-<meta name="keywords" content="杂文">
+<meta name="description" content="在Ubuntu16.04-LTS下安装GitlabGit的好处无须多说，分布式，快速分支，更清晰的开发流程等等，所以计划把公司的代码从SVN转移到Git，在使用了GitHub和Gitlab两个网站后，决定自己在公司的局域网内搭建Gitlab. 安装Ubuntu16.04-LTS 下载：推荐安装amd64版本 种子  安装：我是用VMWare11安装的，主力需要注意将DDR调整为4GB，这个是Git">
 <meta property="og:type" content="article">
-<meta property="og:title" content="写在三十而立">
-<meta property="og:url" content="http://yoursite.com/2017/10/13/写在三十而立/index.html">
+<meta property="og:title" content="Ubuntu16.04LTS下搭建Gitlab">
+<meta property="og:url" content="http://yoursite.com/2018/03/28/Ubuntu16-04LTS下搭建Gitlab/index.html">
 <meta property="og:site_name" content="81博客">
-<meta property="og:description" content="“洗手的时候，日子从水盆里过去；吃饭的时候，日子从饭碗里过去；默默时，便从凝然的双眼前过去” –From 朱自清《匆匆》">
+<meta property="og:description" content="在Ubuntu16.04-LTS下安装GitlabGit的好处无须多说，分布式，快速分支，更清晰的开发流程等等，所以计划把公司的代码从SVN转移到Git，在使用了GitHub和Gitlab两个网站后，决定自己在公司的局域网内搭建Gitlab. 安装Ubuntu16.04-LTS 下载：推荐安装amd64版本 种子  安装：我是用VMWare11安装的，主力需要注意将DDR调整为4GB，这个是Git">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/10/13/写在三十而立/readbook.png">
-<meta property="og:updated_time" content="2018-02-06T03:52:38.766Z">
+<meta property="og:updated_time" content="2018-03-28T09:11:17.604Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="写在三十而立">
-<meta name="twitter:description" content="“洗手的时候，日子从水盆里过去；吃饭的时候，日子从饭碗里过去；默默时，便从凝然的双眼前过去” –From 朱自清《匆匆》">
-<meta name="twitter:image" content="http://yoursite.com/2017/10/13/写在三十而立/readbook.png">
+<meta name="twitter:title" content="Ubuntu16.04LTS下搭建Gitlab">
+<meta name="twitter:description" content="在Ubuntu16.04-LTS下安装GitlabGit的好处无须多说，分布式，快速分支，更清晰的开发流程等等，所以计划把公司的代码从SVN转移到Git，在使用了GitHub和Gitlab两个网站后，决定自己在公司的局域网内搭建Gitlab. 安装Ubuntu16.04-LTS 下载：推荐安装amd64版本 种子  安装：我是用VMWare11安装的，主力需要注意将DDR调整为4GB，这个是Git">
 
 
 
@@ -122,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/13/写在三十而立/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/28/Ubuntu16-04LTS下搭建Gitlab/"/>
 
 
 
 
 
-  <title>写在三十而立 | 81博客</title>
+  <title>Ubuntu16.04LTS下搭建Gitlab | 81博客</title>
   
 
 
@@ -295,7 +292,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/写在三十而立/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/28/Ubuntu16-04LTS下搭建Gitlab/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Bryant81">
@@ -312,7 +309,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">写在三十而立</h1>
+          <h1 class="post-title" itemprop="name headline">Ubuntu16.04LTS下搭建Gitlab</h1>
         
 
         <div class="post-meta">
@@ -324,8 +321,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T11:18:45+08:00">
-                2017-10-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-28T16:47:51+08:00">
+                2018-03-28
               </time>
             
 
@@ -334,28 +331,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/碎碎念/" itemprop="url" rel="index">
-                    <span itemprop="name">碎碎念</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -384,19 +359,75 @@
       
 
       
-        <p><img src="/2017/10/13/写在三十而立/readbook.png" alt="沙滩读书"></p>
+        <h1 id="在Ubuntu16-04-LTS下安装Gitlab"><a href="#在Ubuntu16-04-LTS下安装Gitlab" class="headerlink" title="在Ubuntu16.04-LTS下安装Gitlab"></a>在Ubuntu16.04-LTS下安装Gitlab</h1><p>Git的好处无须多说，分布式，快速分支，更清晰的开发流程等等，所以计划把公司的代码从SVN转移到Git，在使用了GitHub和Gitlab两个网站后，决定自己在公司的局域网内搭建Gitlab.</p>
+<h2 id="安装Ubuntu16-04-LTS"><a href="#安装Ubuntu16-04-LTS" class="headerlink" title="安装Ubuntu16.04-LTS"></a>安装Ubuntu16.04-LTS</h2><ul>
+<li>下载：推荐安装amd64版本 <a href="http://releases.ubuntu.com/16.04/ubuntu-16.04.4-desktop-amd64.iso.torrent?_ga=2.16967225.1283571371.1522211051-1536568839.1517620741" target="_blank" rel="external">种子</a> </li>
+<li>安装：我是用VMWare11安装的，主力需要注意将DDR调整为4GB，这个是Gitlab官方推荐的大小</li>
+<li><p>更新源: 我这里使用的是清华镜像，速度很快。gitlab-ce也会用到清华的镜像，后面会提到</p>
 <blockquote>
-<p>“洗手的时候，日子从水盆里过去；吃饭的时候，日子从饭碗里过去；默默时，便从凝然的双眼前过去” –From 朱自清《匆匆》</p>
+<p>vi /etc/apt/source.list<br>deb <a href="http://mirrors.tuna.tsinghua.edu.cn/ubuntu/" target="_blank" rel="external">http://mirrors.tuna.tsinghua.edu.cn/ubuntu/</a> xenial main restricted<br>deb <a href="http://mirrors.tuna.tsinghua.edu.cn/ubuntu/" target="_blank" rel="external">http://mirrors.tuna.tsinghua.edu.cn/ubuntu/</a> xenial-updates main restricted<br>deb <a href="http://mirrors.tuna.tsinghua.edu.cn/ubuntu/" target="_blank" rel="external">http://mirrors.tuna.tsinghua.edu.cn/ubuntu/</a> xenial universe<br>deb <a href="http://mirrors.tuna.tsinghua.edu.cn/ubuntu/" target="_blank" rel="external">http://mirrors.tuna.tsinghua.edu.cn/ubuntu/</a> xenial-updates universe<br>deb <a href="http://mirrors.tuna.tsinghua.edu.cn/ubuntu/" target="_blank" rel="external">http://mirrors.tuna.tsinghua.edu.cn/ubuntu/</a> xenial multiverse<br>deb <a href="http://mirrors.tuna.tsinghua.edu.cn/ubuntu/" target="_blank" rel="external">http://mirrors.tuna.tsinghua.edu.cn/ubuntu/</a> xenial-updates multiverse<br>deb <a href="http://mirrors.tuna.tsinghua.edu.cn/ubuntu/" target="_blank" rel="external">http://mirrors.tuna.tsinghua.edu.cn/ubuntu/</a> xenial-backports main restricted universe multiverse<br>deb <a href="http://mirrors.tuna.tsinghua.edu.cn/ubuntu/" target="_blank" rel="external">http://mirrors.tuna.tsinghua.edu.cn/ubuntu/</a> xenial-security main restricted<br>deb <a href="http://mirrors.tuna.tsinghua.edu.cn/ubuntu/" target="_blank" rel="external">http://mirrors.tuna.tsinghua.edu.cn/ubuntu/</a> xenial-security universe<br>deb <a href="http://mirrors.tuna.tsinghua.edu.cn/ubuntu/" target="_blank" rel="external">http://mirrors.tuna.tsinghua.edu.cn/ubuntu/</a> xenial-security multiverse</p>
 </blockquote>
-<a id="more"></a>
-<h2 id="为何会越过越快？"><a href="#为何会越过越快？" class="headerlink" title="为何会越过越快？"></a>为何会越过越快？</h2><p>随着年龄的增长，我们似乎越来越频繁的感觉到时间的流逝速度加快，那天一位同事说，每次看别人家的孩子都觉的长得好快，我笑呵呵的说，“我天天看自己家的娃们，都觉得快，更何况是你这种多久才见一次的呢”，从前时间是客观度量，只是随着人的年龄增长多了些多愁善感罢了，但是在科学的态度这是不严谨也不可靠的。</p>
-<h3 id="比例假说"><a href="#比例假说" class="headerlink" title="比例假说"></a>比例假说</h3><p>是法国哲学家Paul Janet在1897年「看来很早以前人类就有这个困惑了」提出的关于人类对时间流逝感受速度的理论。在他的理论中，1年的时间在人的记忆中所占的比重是不一样的。比如，当你1岁的时候，1年就是你生命的全部。当你50岁的时候，1年只是你生命的2%。这样，你的生命越长，1年时间所占的比重就越小。这意味着让一个5岁的小孩为圣诞节等待24天，相当于让一个54岁的的人等待1年。</p>
-<h3 id="神经元脉冲速度差异"><a href="#神经元脉冲速度差异" class="headerlink" title="神经元脉冲速度差异"></a>神经元脉冲速度差异</h3><p>比例假说试图向我们解释为何对过去时间的感知随着年龄增长而加速，但没有解释为何「当下」变快。Youtube上Veritasium频道的一个视频向我们展示了这一现象（<a href="https://www.youtube.com/watch?v=aIx2N-viNwY）视频中年轻人和老人自己预估一分钟的时间，对于客观的时间是有明显差异的。这种可能和大脑中的神经元脉冲速度有关。随着年龄的增长，脉冲的速度放缓，导致我们对时间的感知变慢，那么我们就感觉外界一切都加速，就像一台主频很低的CPU无法应对高速的信息输入。" target="_blank" rel="external">https://www.youtube.com/watch?v=aIx2N-viNwY）视频中年轻人和老人自己预估一分钟的时间，对于客观的时间是有明显差异的。这种可能和大脑中的神经元脉冲速度有关。随着年龄的增长，脉冲的速度放缓，导致我们对时间的感知变慢，那么我们就感觉外界一切都加速，就像一台主频很低的CPU无法应对高速的信息输入。</a></p>
-<h3 id="呼吸和心跳假说"><a href="#呼吸和心跳假说" class="headerlink" title="呼吸和心跳假说"></a>呼吸和心跳假说</h3><p>最广泛被接受的理论，其实理论的本质上还是和激素分泌以及新城代谢有关。从出生到衰老，我们的呼吸和心跳都在频率降低，幼儿时候心跳两次才过去一秒，而成年人大概每一秒只心跳一次。</p>
-<h3 id="大脑的时间片段和神经适应假说"><a href="#大脑的时间片段和神经适应假说" class="headerlink" title="大脑的时间片段和神经适应假说"></a>大脑的时间片段和神经适应假说</h3><p>待补充</p>
-<h3 id="注意力控制假说"><a href="#注意力控制假说" class="headerlink" title="注意力控制假说"></a>注意力控制假说</h3><p>为啥无聊的时候时间很慢，而注意力集中的时候时间很快？以色列的认知心理学家Dan Zakay 提出了注意力闸门模型（attention gate model），当我们集中精力干一件事情的时候「比如当初谈恋爱的时候和老婆压马路，一不留神就逛了一大圈」，注意力闸门是打开的，大脑在连续处理信息忙的很，所以感知时间过的很快。反过来，在无聊的时候「比如婚后陪老婆逛商场，度日如年」，注意力闸门是关闭的，大脑开始向外界搜索多种多样的信号，然后不断的比较和整合信息，中断次数很多，所以觉得时间过得很慢。</p>
-<h2 id="让时间慢下来"><a href="#让时间慢下来" class="headerlink" title="让时间慢下来"></a>让时间慢下来</h2><p>让时间慢下来，就是具有应对时空扭曲的能力。套用知乎上「舒适区」的说法，我们必须走出这个熟悉区，因为它是个时空黑洞，会不断的吞噬你的时间。因为每天我们在熟悉区里做的都是简单重复的工作，调动的信息也比较有限，轻车熟路，总信息量增加非常少。平时出差区不熟悉的地方，感觉一天时间明显变长，而不是在公司午睡起来基本就等待下班了。所以获取新的思考角度，开启全新的旅程，学习并掌握一项新的技能都能不断延长我们的主观生命。</p>
-<h2 id="成为具备核心竞争力的人"><a href="#成为具备核心竞争力的人" class="headerlink" title="成为具备核心竞争力的人"></a>成为具备核心竞争力的人</h2>
+</li>
+<li><p>更新软件仓库</p>
+<blockquote>
+<p>sudo apt-get update</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="安装Gitlab相关"><a href="#安装Gitlab相关" class="headerlink" title="安装Gitlab相关"></a>安装Gitlab相关</h2><ul>
+<li><p>安装ssh服务和认证服务</p>
+<blockquote>
+<p>sudo apt-get install -y curl openssh-server ca-certificates </p>
+</blockquote>
+</li>
+<li><p>安装邮件服务,如果不需要邮件通知或者使用其他的邮件服务，比如sendmail等可以跳过</p>
+<blockquote>
+<p>sudo apt-get install postfix</p>
+</blockquote>
+</li>
+<li><p>信任 GitLab 的 GPG 公钥</p>
+<blockquote>
+<p>curl <a href="https://packages.gitlab.com/gpg.key" target="_blank" rel="external">https://packages.gitlab.com/gpg.key</a> 2&gt; /dev/null | sudo apt-key add - &amp;&gt;/dev/null</p>
+</blockquote>
+</li>
+<li><p>将下列源手动添加到/etc/apt/sources.list.d/gitlab-ce.list文件中，如果没有手动创建</p>
+<blockquote>
+<p>deb <a href="https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/ubuntu" target="_blank" rel="external">https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/ubuntu</a> xenial main</p>
+</blockquote>
+</li>
+<li><p>安装gitlab-ce</p>
+<blockquote>
+<p>sudo apt-get update<br>sudo apt-get install gitlab-ce</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="配置Gitlab相关"><a href="#配置Gitlab相关" class="headerlink" title="配置Gitlab相关"></a>配置Gitlab相关</h2><ul>
+<li><p>设置LC_ALL LC_CTYPE: 如果不设置，在gitlab-ctl reconfigure的时候会报LC_ALL相关的错</p>
+<blockquote>
+<p>vi ~/.bashrc<br>export LC_ALL=”en_US.UTF-8”<br>export LC_CTYPE=”en_US.UTF-8”</p>
+</blockquote>
+</li>
+<li><p>设置访问路径</p>
+<blockquote>
+<p>vi /etc/gitlab/gitlab.rb<br>external_url 修改为你给定的访问路径，我设置的为 “<a href="http://192.168.41.8:8866" target="_blank" rel="external">http://192.168.41.8:8866</a>“, 仅限局域网访问</p>
+</blockquote>
+</li>
+<li><p>重新生成配置</p>
+<blockquote>
+<p>sudo gitlab-ctl reconfigure</p>
+</blockquote>
+</li>
+<li><p>重启服务</p>
+<blockquote>
+<p>sudo gitlabl-ctl restart</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="第一次访问"><a href="#第一次访问" class="headerlink" title="第一次访问"></a>第一次访问</h2><ul>
+<li>直接使用external_url的地址可以访问到gitlab提供的网站服务</li>
+<li>默认用户名是root,第一次访问会强制让你修改密码</li>
+</ul>
+
       
     </div>
     
@@ -411,12 +442,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/杂文/" rel="tag"># 杂文</a>
-          
-        </div>
-      
 
       
       
@@ -426,15 +451,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/02/03/说说影响成像的那些参数/" rel="next" title="说说影响成像的那些参数">
+                <i class="fa fa-chevron-left"></i> 说说影响成像的那些参数
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/24/说说科大讯飞全球1024开发者节/" rel="prev" title="说说科大讯飞全球1024开发者节">
-                说说科大讯飞全球1024开发者节 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -586,7 +611,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为何会越过越快？"><span class="nav-number">1.</span> <span class="nav-text">为何会越过越快？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#比例假说"><span class="nav-number">1.1.</span> <span class="nav-text">比例假说</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#神经元脉冲速度差异"><span class="nav-number">1.2.</span> <span class="nav-text">神经元脉冲速度差异</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#呼吸和心跳假说"><span class="nav-number">1.3.</span> <span class="nav-text">呼吸和心跳假说</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大脑的时间片段和神经适应假说"><span class="nav-number">1.4.</span> <span class="nav-text">大脑的时间片段和神经适应假说</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意力控制假说"><span class="nav-number">1.5.</span> <span class="nav-text">注意力控制假说</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#让时间慢下来"><span class="nav-number">2.</span> <span class="nav-text">让时间慢下来</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#成为具备核心竞争力的人"><span class="nav-number">3.</span> <span class="nav-text">成为具备核心竞争力的人</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#在Ubuntu16-04-LTS下安装Gitlab"><span class="nav-number">1.</span> <span class="nav-text">在Ubuntu16.04-LTS下安装Gitlab</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Ubuntu16-04-LTS"><span class="nav-number">1.1.</span> <span class="nav-text">安装Ubuntu16.04-LTS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Gitlab相关"><span class="nav-number">1.2.</span> <span class="nav-text">安装Gitlab相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Gitlab相关"><span class="nav-number">1.3.</span> <span class="nav-text">配置Gitlab相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一次访问"><span class="nav-number">1.4.</span> <span class="nav-text">第一次访问</span></a></li></ol></li></ol></div>
             
 
           </div>
