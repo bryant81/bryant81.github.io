@@ -384,78 +384,14 @@
 
       
         
-          
-            <a id="more"></a>
-<h1 id="在Ubuntu16-04-LTS下安装Gitlab"><a href="#在Ubuntu16-04-LTS下安装Gitlab" class="headerlink" title="在Ubuntu16.04-LTS下安装Gitlab"></a>在Ubuntu16.04-LTS下安装Gitlab</h1><p>Git的好处无须多说，分布式，快速分支，更清晰的开发流程等等，所以计划把公司的代码从SVN转移到Git，在使用了GitHub和Gitlab两个网站后，决定自己在公司的局域网内搭建Gitlab.</p>
-<h2 id="安装Ubuntu16-04-LTS"><a href="#安装Ubuntu16-04-LTS" class="headerlink" title="安装Ubuntu16.04-LTS"></a>安装Ubuntu16.04-LTS</h2><ul>
-<li>下载：推荐安装amd64版本 <a href="http://releases.ubuntu.com/16.04/ubuntu-16.04.4-desktop-amd64.iso.torrent?_ga=2.16967225.1283571371.1522211051-1536568839.1517620741" target="_blank" rel="external">种子</a> </li>
-<li>安装：我是用VMWare11安装的，主力需要注意将DDR调整为4GB，这个是Gitlab官方推荐的大小</li>
-<li><p>更新源: 我这里使用的是清华镜像，速度很快。gitlab-ce也会用到清华的镜像，后面会提到</p>
-<blockquote>
-<p>vi /etc/apt/source.list<br>deb <a href="http://mirrors.tuna.tsinghua.edu.cn/ubuntu/" target="_blank" rel="external">http://mirrors.tuna.tsinghua.edu.cn/ubuntu/</a> xenial main restricted<br>deb <a href="http://mirrors.tuna.tsinghua.edu.cn/ubuntu/" target="_blank" rel="external">http://mirrors.tuna.tsinghua.edu.cn/ubuntu/</a> xenial-updates main restricted<br>deb <a href="http://mirrors.tuna.tsinghua.edu.cn/ubuntu/" target="_blank" rel="external">http://mirrors.tuna.tsinghua.edu.cn/ubuntu/</a> xenial universe<br>deb <a href="http://mirrors.tuna.tsinghua.edu.cn/ubuntu/" target="_blank" rel="external">http://mirrors.tuna.tsinghua.edu.cn/ubuntu/</a> xenial-updates universe<br>deb <a href="http://mirrors.tuna.tsinghua.edu.cn/ubuntu/" target="_blank" rel="external">http://mirrors.tuna.tsinghua.edu.cn/ubuntu/</a> xenial multiverse<br>deb <a href="http://mirrors.tuna.tsinghua.edu.cn/ubuntu/" target="_blank" rel="external">http://mirrors.tuna.tsinghua.edu.cn/ubuntu/</a> xenial-updates multiverse<br>deb <a href="http://mirrors.tuna.tsinghua.edu.cn/ubuntu/" target="_blank" rel="external">http://mirrors.tuna.tsinghua.edu.cn/ubuntu/</a> xenial-backports main restricted universe multiverse<br>deb <a href="http://mirrors.tuna.tsinghua.edu.cn/ubuntu/" target="_blank" rel="external">http://mirrors.tuna.tsinghua.edu.cn/ubuntu/</a> xenial-security main restricted<br>deb <a href="http://mirrors.tuna.tsinghua.edu.cn/ubuntu/" target="_blank" rel="external">http://mirrors.tuna.tsinghua.edu.cn/ubuntu/</a> xenial-security universe<br>deb <a href="http://mirrors.tuna.tsinghua.edu.cn/ubuntu/" target="_blank" rel="external">http://mirrors.tuna.tsinghua.edu.cn/ubuntu/</a> xenial-security multiverse</p>
-</blockquote>
-</li>
-<li><p>更新软件仓库</p>
-<blockquote>
-<p>sudo apt-get update</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="安装Gitlab相关"><a href="#安装Gitlab相关" class="headerlink" title="安装Gitlab相关"></a>安装Gitlab相关</h2><ul>
-<li><p>安装ssh服务和认证服务</p>
-<blockquote>
-<p>sudo apt-get install -y curl openssh-server ca-certificates </p>
-</blockquote>
-</li>
-<li><p>安装邮件服务,如果不需要邮件通知或者使用其他的邮件服务，比如sendmail等可以跳过</p>
-<blockquote>
-<p>sudo apt-get install postfix</p>
-</blockquote>
-</li>
-<li><p>信任 GitLab 的 GPG 公钥</p>
-<blockquote>
-<p>curl <a href="https://packages.gitlab.com/gpg.key" target="_blank" rel="external">https://packages.gitlab.com/gpg.key</a> 2&gt; /dev/null | sudo apt-key add - &amp;&gt;/dev/null</p>
-</blockquote>
-</li>
-<li><p>将下列源手动添加到/etc/apt/sources.list.d/gitlab-ce.list文件中，如果没有手动创建</p>
-<blockquote>
-<p>deb <a href="https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/ubuntu" target="_blank" rel="external">https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/ubuntu</a> xenial main</p>
-</blockquote>
-</li>
-<li><p>安装gitlab-ce</p>
-<blockquote>
-<p>sudo apt-get update<br>sudo apt-get install gitlab-ce</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="配置Gitlab相关"><a href="#配置Gitlab相关" class="headerlink" title="配置Gitlab相关"></a>配置Gitlab相关</h2><ul>
-<li><p>设置LC_ALL LC_CTYPE: 如果不设置，在gitlab-ctl reconfigure的时候会报LC_ALL相关的错</p>
-<blockquote>
-<p>vi ~/.bashrc<br>export LC_ALL=”en_US.UTF-8”<br>export LC_CTYPE=”en_US.UTF-8”</p>
-</blockquote>
-</li>
-<li><p>设置访问路径</p>
-<blockquote>
-<p>vi /etc/gitlab/gitlab.rb<br>external_url 修改为你给定的访问路径，我设置的为 “<a href="http://192.168.41.8:8866" target="_blank" rel="external">http://192.168.41.8:8866</a>“, 仅限局域网访问</p>
-</blockquote>
-</li>
-<li><p>重新生成配置</p>
-<blockquote>
-<p>sudo gitlab-ctl reconfigure</p>
-</blockquote>
-</li>
-<li><p>重启服务</p>
-<blockquote>
-<p>sudo gitlabl-ctl restart</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="第一次访问"><a href="#第一次访问" class="headerlink" title="第一次访问"></a>第一次访问</h2><ul>
-<li>直接使用external_url的地址可以访问到gitlab提供的网站服务</li>
-<li>默认用户名是root,第一次访问会强制让你修改密码</li>
-</ul>
-
-          
+          <h1 id="在Ubuntu16-04-LTS下安装Gitlab"><a href="#在Ubuntu16-04-LTS下安装Gitlab" class="headerlink" title="在Ubuntu16.04-LTS下安装Gitlab"></a>在Ubuntu16.04-LTS下安装Gitlab</h1><p>Git的好处无须多说，分布式，快速分支，更清晰的开发流程等等，所以计划把公司的代码从SVN转移到Git，在使用了GitHub和Gitlab两个网站后，决定自己在公司的局域网内搭建Gitlab.</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/28/Ubuntu16-04LTS下搭建Gitlab/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
